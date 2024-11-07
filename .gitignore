@@ -21,3 +21,4 @@ yarn-error.log
 /.vscode
 /.zed
 /b7store-base
+/public/temp
