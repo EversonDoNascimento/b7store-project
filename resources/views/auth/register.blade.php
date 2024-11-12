@@ -20,35 +20,36 @@
 
         <form method="POST" action="{{route('auth.register_action')}}">
             @csrf
-          @if($errors->any())
-            <ul>
-                @forEach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforEach
-            </ul>
-          @endif
           <div class="name-area">
             <div class="name-label">Nome</div>
-            <input name="name" type="text" placeholder="Digite o seu nome" />
+            <input class="@error('name') is_invalid @enderror" name="name" type="text" placeholder="Digite o seu nome" value="{{@old('name')}}"/>
           </div>
+          @error("name")
+            <div class="error">
+              {{$message}}
+            </div>
+          @enderror
           <div class="email-area">
             <div class="email-label">E-mail</div>
-            <input name="email" type="email" placeholder="Digite o seu e-mail" />
+            <input class="@error('email') is_invalid @enderror"  name="email" type="email" placeholder="Digite o seu e-mail" value="{{@old('email')}}" />
           </div>
-          <div class="password-area">
-            <div class="password-label">Senha</div>
-            <div class="password-input-area">
-              <input name="password" type="password" placeholder="Digite a sua senha" />
-              <img src="assets/icons/eyeIcon.png" alt="Ícone mostrar senha" />
+          @error("email")
+            <div class="error">
+              {{$message}}
             </div>
-          </div>
-          <div class="password-area">
-            <div class="password-label">Confirme sua senha</div>
-            <div class="password-input-area">
-              <input name="password_confirmation" type="password" placeholder="Digite a sua senha" />
-              <img src="assets/icons/eyeIcon.png" alt="Ícone mostrar senha" />
+          @enderror
+          <x-form.inputpass name="password" placeholder="Digite sua senha" label="Senha:" id="password"></x-form.inputpass>
+          @error("password")
+            <div class="error">
+              {{$message}}
             </div>
-          </div>
+          @enderror
+          <x-form.inputpass name="password_confirmation" placeholder="Confirme sua senha" label="Confirme a senha:" id="password_confirmation"></x-form.inputpass>
+          @error("password_confirmation")
+            <div class="error">
+              {{$message}}
+            </div>
+          @enderror
           <button class="login-button">Cadastrar</button>
         </form>
         <div class="register-area">
