@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,7 @@ Route::post('/register',[AuthController::class, 'register_action'])->name('auth.
 Route::get('/forgot-password', function() {
     return view(('auth.forgot-password'));
 })->name('forgot-password');
+
+Route::get("/select-state", [StateController::class, 'index'])->name('state.select-state');
+
+Route::post("/state-action", [StateController::class, 'register_state'])->name('state.state_action');
