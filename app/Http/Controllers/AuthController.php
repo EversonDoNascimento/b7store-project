@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\StateRequest;
 use App\Models\User;
@@ -25,5 +26,15 @@ class AuthController extends Controller
         // dd($user);
     }
 
+    public function login_action(LoginRequest $request){
+        $dataInput = $request->only(["email", "password"]);
+
+        if(!Auth::attempt($dataInput)){
+            $data['message'] = "Email or Password Invalid";
+            return \view('auth.login', $data);
+        }
+        
+        return \redirect("/");
+    }
   
 }
