@@ -18,11 +18,7 @@
           Use as suas credenciais para realizar o Login.
         </div>
         <form action="{{route('auth.login_action')}}" method="POST">
-          @if($message)
-            <div class="error">
-              {{$message}}
-            </div>
-          @endif
+      
           @csrf
           <div class="email-area">
             <div class="email-label">E-mail</div>
@@ -60,3 +56,10 @@
   <x-base.footer></x-base.footer>
   </body>
 </html>
+
+<?php
+    // <!-- @if($data && $data['message'])
+    //         <div class="error">
+    //           {{$data['message']}}
+    //         </div>
+    //       @endif -->

@@ -19,7 +19,7 @@ class StateController extends Controller
        
         $stateRegister = State::where('name', $state['state'])->first();
         if(!$stateRegister){
-            \redirect("/login");
+            return \redirect("/login");
         }
         if(!Auth::check()){
             return \redirect("/login");
