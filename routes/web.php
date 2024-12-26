@@ -5,20 +5,25 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(['auth'])->group(function () {
+    
 
+    Route::get("/select-state", [StateController::class, 'index'])->name('state.select-state');
+    Route::post("/state-action", [StateController::class, 'register_state'])->name('state.state_action');
+
+    //Dashboard
+
+    Route::get('/dashboard',[DashboardController::class, "my_account"])->name('dashboard.my_account');
+    Route::post('/dashboard', [DashboardController::class, "my_account_action"])->name('dashboard.my_account_action');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+});
 // Pages
 
 Route::get('/', function () {
     return view("home");
 })->name('home');
 
-Route::get("/select-state", [StateController::class, 'index'])->name('state.select-state');
-Route::post("/state-action", [StateController::class, 'register_state'])->name('state.state_action');
-
-//Dashboard
-
-Route::get('/dashboard',[DashboardController::class, "my_account"])->name('dashboard.my_account');
-Route::post('/dashboard', [DashboardController::class, "my_account_action"])->name('dashboard.my_account_action');
 
 /*
 //Auth Routes
@@ -26,6 +31,7 @@ Route::post('/dashboard', [DashboardController::class, "my_account_action"])->na
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
 
 Route::post("/login", [AuthController::class, 'login_action'])->name('auth.login_action');
 

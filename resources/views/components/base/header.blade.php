@@ -17,11 +17,11 @@
         <a href="" class="announce-now">Anunciar agora →</a>
         <img class="menu-icon" src="assets/icons/menuIcon.png" alt="Menu" />
         <div class="menu-mobile">
-        <a href="myAccount.html" class="my-account-mobile">
+        <a href="{{route('dashboard.my_account')}}" class="my-account-mobile">
             <img src="assets/icons/userIcon.png" alt="Ícone do usuário" />
             Minha Conta
         </a>
-        <a class="my-account-mobile" href="/index.html"
+        <a class="my-account-mobile" href="{{route('auth.logout')}}">
             ><img src="assets/icons/logoutIcon.png" /> Sair</a
         >
         </div>
