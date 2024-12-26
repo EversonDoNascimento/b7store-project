@@ -23,5 +23,9 @@ class DashboardController extends Controller
         $user->save();
         return \redirect(route("dashboard.my_account"))->with("success", "Informações atualizadas com sucesso!");
 
+    }
+
+    public function my_ads(){
+        return view("dashboard.my_ads");
     }   
 }

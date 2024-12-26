@@ -30,6 +30,19 @@
   line-height: normal;
   margin-bottom: 56px;
 }
+
+.sidebar-top .config-myAds {
+  color: #96a3ab;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 56px;
+}
+
+.sidebar-top .config-myAds {
+   color: #5c7bfa;
+}
+
 .sidebar-bottom {
   margin-bottom: 72px;
 }
