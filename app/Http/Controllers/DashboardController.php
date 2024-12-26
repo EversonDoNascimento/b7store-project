@@ -16,16 +16,12 @@ class DashboardController extends Controller
     }
     public function my_account_action(profileRequest $request){
         $data = $request->only(["name", "email", "state"]);
-        $findState = State::find($data['state']);
-        if(!$findState){
-            return \redirect(route("dashboard.my_account"));
-        }
         $user = Auth::user();
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->state_id = $data['state'];
         $user->save();
-        return \redirect(route("dashboard.my_account"));
+        return \redirect(route("dashboard.my_account"))->with("success", "Informações atualizadas com sucesso!");
 
     }   
 }

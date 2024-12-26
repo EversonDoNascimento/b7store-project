@@ -15,7 +15,7 @@ class profileRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email' , 'max:255',
             Rule::unique('users')->ignore(Auth::user()->id)],
-            'state' => ['required', 'numeric'],
+            'state' => ['required', 'numeric', 'exists:states,id'],
         ];
     }
 }

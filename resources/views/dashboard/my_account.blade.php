@@ -12,7 +12,13 @@
   <body>
     <x-base.header></x-base.header>
     <main>
+   
       <div class="my-account-page">
+            @if (session()->has('success'))
+              <div class="alert success">
+                <p>{{session()->get('success')}}</p>
+              </div>
+            @endif
         <div class="sidebar">
           <div class="sidebar-top">
             <a href="/myAccount.html" class="config"
