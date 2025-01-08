@@ -26,6 +26,8 @@ class DashboardController extends Controller
     }
 
     public function my_ads(){
-        return view("dashboard.my_ads");
+        $user = Auth::user();        
+        $advertises = $user->advertises;
+        return view("dashboard.my_ads", compact(var_name: "advertises"));
     }   
 }

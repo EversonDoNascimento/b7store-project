@@ -18,78 +18,35 @@
         <div class="myAds-area">
           <h3 class="myAds-title">Meus Anúncios</h3>
           <div class="myAds-ads-area">
-            <div class="my-ad-item">
-              <div class="ad-image-area">
-                <div class="ad-buttons">
-                  <div class="ad-button">
-                    <img src="assets/icons/deleteIcon.png" />
-                  </div>
-                  <div class="ad-button">
-                    <img src="assets/icons/editIcon.png" />
-                  </div>
-                </div>
-                <div
-                  class="ad-image"
-                  style="background-image: url('assets/myAds/game1.png')"
-                ></div>
+            @if(count($advertises) == 0)
+              <div>
+                Sem anúncios
               </div>
-              <div class="ad-title">Controle PS4 - Preto</div>
-              <div class="ad-price">R$ 275,00</div>
-            </div>
-            <div class="my-ad-item">
-              <div class="ad-image-area">
-                <div class="ad-buttons">
-                  <div class="ad-button">
-                    <img src="assets/icons/deleteIcon.png" />
+            @else
+            @foreach ($advertises as $ads)
+              <div class="my-ad-item">
+                <div class="ad-image-area">
+                  <div class="ad-buttons">
+                    <div class="ad-button">
+                      <img src="assets/icons/deleteIcon.png" />
+                    </div>
+                    <div class="ad-button">
+                      <img src="assets/icons/editIcon.png" />
+                    </div>
                   </div>
-                  <div class="ad-button">
-                    <img src="assets/icons/editIcon.png" />
-                  </div>
+                  <div
+                    class="ad-image"
+                    style="background-image: url('{{$ads->images->where('featured', 1)->first()->url ?? 'http://placehold.it/150x150'}}')"
+                  ></div>
                 </div>
-                <div
-                  class="ad-image"
-                  style="background-image: url('assets/myAds/game2.png')"
-                ></div>
+                <div class="ad-title">{{$ads->title}}</div>
+                <div class="ad-price">R$ {{number_format(num: $ads->price, decimals: 2, decimal_separator: ',', thousands_separator: '.')}}</div>
               </div>
-              <div class="ad-title">Controle Xbox One S - Branco</div>
-              <div class="ad-price">R$ 275,00</div>
-            </div>
-            <div class="my-ad-item">
-              <div class="ad-image-area">
-                <div class="ad-buttons">
-                  <div class="ad-button">
-                    <img src="assets/icons/deleteIcon.png" />
-                  </div>
-                  <div class="ad-button">
-                    <img src="assets/icons/editIcon.png" />
-                  </div>
-                </div>
-                <div
-                  class="ad-image"
-                  style="background-image: url('assets/myAds/game3.png')"
-                ></div>
-              </div>
-              <div class="ad-title">PlayStation 5 - Digital Edition</div>
-              <div class="ad-price">R$ 4.898,96</div>
-            </div>
-            <div class="my-ad-item">
-              <div class="ad-image-area">
-                <div class="ad-buttons">
-                  <div class="ad-button">
-                    <img src="assets/icons/deleteIcon.png" />
-                  </div>
-                  <div class="ad-button">
-                    <img src="assets/icons/editIcon.png" />
-                  </div>
-                </div>
-                <div
-                  class="ad-image"
-                  style="background-image: url('assets/myAds/game4.png')"
-                ></div>
-              </div>
-              <div class="ad-title">Controle PS5 - Azul</div>
-              <div class="ad-price">R$ 575,00</div>
-            </div>
+        
+            @endforeach
+            @endif
+            
+           
           </div>
         </div>
       </div>
