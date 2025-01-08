@@ -1,15 +1,15 @@
 <header>
     <div class="header-area">
-    <a href="" class="header-area-left">B7Store</a>
+    <a href="/" class="header-area-left">B7Store</a>
     <div class="header-area-right">
         @if (Auth::check())
-            <a href="login.html" class="my-account">
+            <a href="{{route('dashboard.my_account')}}"  class="my-account">
             <img src="assets/icons/userIcon.png" />
             Minha Conta
             </a>
         
         @else
-            <a href="{{route('login')}}" class="my-account">
+            <a href="{{route('auth.login')}}"  class="my-account">
             <img src="assets/icons/userIcon.png" />
             Login
             </a>
