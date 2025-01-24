@@ -31,7 +31,7 @@
     <div class="ads-title">Anúncios recentes</div>
     <div class="ads-area">
         @forEach($products as $product)
-            <x-base.simple-advertise :data="$product"></x-base.simple-advertise>
+            <x-ads-card :ads="$product"></x-ads-card>
         @endforEach
     </div>
 </div>
