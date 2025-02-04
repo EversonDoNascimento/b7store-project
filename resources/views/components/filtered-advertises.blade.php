@@ -31,7 +31,7 @@
     <div class="ads-title">Anúncios recentes</div>
     <div class="ads-area">
         @forEach($products as $product)
-            <x-ads-card :ads="$product"></x-ads-card>
+            <x-ads-card :ads="$product" :isEdit="false"></x-ads-card>
         @endforEach
     </div>
 </div>
