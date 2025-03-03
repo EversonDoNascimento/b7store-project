@@ -20,7 +20,7 @@
           <div class="myAds-ads-area">
             @if(count($advertises) == 0)
               <div>
-                Sem anúncios
+                Você ainda não possui anúncios cadastrados
               </div>
             @else
             @foreach ($advertises as $ads)

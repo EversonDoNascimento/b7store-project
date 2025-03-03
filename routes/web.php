@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StateController;
@@ -17,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard', [DashboardController::class, "my_account_action"])->name('dashboard.my_account_action');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/my-ads', [DashboardController::class, 'my_ads'])->name('dashboard.my_ads');
+    Route::get("/ad/delete/{id}", [AdController::class, "ad_delete"])->name("ad.delete");
 });
 // Pages
 
