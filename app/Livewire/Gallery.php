@@ -15,4 +15,8 @@ class Gallery extends Component
     public function mount(){
        
     }
+
+    public function setMainImage($image){
+        $this->advertise['main_image'] = $image;
+    }
 }

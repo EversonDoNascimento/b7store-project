@@ -13,13 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class AdController extends Controller
 {
     public function ad_delete($id){
-        
-        $ad = Advertise::where(["id" => $id])->where(["user_id" => Auth::user()->id])->first();
-        if(!$ad){
-            return \redirect()->back()->with('error', 'Anúncio não encontrado');
-        }
-        $ad->delete();
-        return \redirect()->back()->with('success', 'Anúncio deletado com sucesso!');
+        AdService::deleteAd($id);
     }
 
     public function show(String $slug){

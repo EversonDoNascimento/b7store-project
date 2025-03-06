@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Advertise;
 use App\Models\AdvertiseImage;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class AdService {
     public static function getSingleAd(String $slug) {
@@ -21,5 +23,15 @@ class AdService {
         $ad['images'] = $ad->images;
 
         return $ad;
+    }
+
+    public static function deleteAd($id) {
+        try {
+            Advertise::where(["id" => $id])->where(["user_id" => Auth::user()->id])->first();
+            return \redirect()->to("/")->with('success', 'Anúncio deletado com sucesso!');
+
+        }catch(Exception $e) {
+            return \redirect()->to("/")->with('error', 'Anúncio não encontrado');
+        }
     }
 }
