@@ -20,4 +20,9 @@ class Advertise extends Model
         return $this->hasMany(related: AdvertiseImage::class);
     }
 
+    public function state() : BelongsTo {
+        return $this->belongsTo(related: State::class);
+    }
+    
+
 }
