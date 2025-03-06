@@ -10,7 +10,7 @@
         
         @else
             <a href="{{route('auth.login')}}"  class="my-account">
-            <img src="assets/icons/userIcon.png" />
+            <img src="{{asset('assets/icons/userIcon.png')}}" />
             Login
             </a>
         @endif

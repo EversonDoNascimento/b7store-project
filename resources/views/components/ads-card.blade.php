@@ -16,7 +16,7 @@
     }
 </style>
 
-<div class="my-ad-item">
+<a href="{{route('ad.show', ['slug' => $ads->slug])}}" style="{{ !$isEdit ? 'cursor: pointer;' : ''}}; text-decoration: none" class="my-ad-item">
     @if(Auth::user()?-> id !== null && !empty($ads) && $ads->user_id == Auth::user()->id && isset($isEdit) && $isEdit === false)
         <div class="pill">Meu anúncio</div>
     @endif
@@ -39,4 +39,4 @@
     </div>
         <div class="ad-title">{{$ads->title}}</div>
     <div class="ad-price">R$ {{number_format(num: $ads->price, decimals: 2, decimal_separator: ',', thousands_separator: '.')}}</div>
-</div>
+</a>

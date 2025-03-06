@@ -6,6 +6,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get("ad/{slug}", [AdController::class, "show"])->name("ad.show");
+
 Route::middleware(['auth'])->group(function () {
     
 
