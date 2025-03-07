@@ -1,14 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Advertise;
-use App\Models\AdvertiseImage;
-use App\Models\Category;
-use App\Models\State;
 use App\Services\AdService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class AdController extends Controller
 {
@@ -18,6 +12,7 @@ class AdController extends Controller
 
     public function show(String $slug){
         $ad = AdService::getSingleAd($slug);
-        return view("single-ad", ["advertise" => $ad]);
+        $relatedAds = AdService::getRelatedAds($ad->category_id, $ad->state_id, $ad->id);
+        return view("single-ad", ["advertise" => $ad, "relatedAds" => $relatedAds]);
     }
 }

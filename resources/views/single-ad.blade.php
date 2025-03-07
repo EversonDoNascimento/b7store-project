@@ -9,6 +9,8 @@
     />
     <link rel="stylesheet" href="{{asset('assets/style.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/adPageStyle.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/myAdsStyle.css')}}" />
+
     <title>B7Store</title>
   </head>
   
@@ -42,38 +44,13 @@
       <div class="ads">
         <div class="ads-title">Anúncios relacionados</div>
         <div class="ads-area">
-          <div class="ad-item">
-            <div
-              class="ad-image"
-              style="background-image: url('/assets/adFusca/fusca6.png')"
-            ></div>
-            <div class="ad-title">Volkswagen Fusca 67 - Equipado</div>
-            <div class="ad-price">R$ 33.990,00</div>
-          </div>
-          <div class="ad-item">
-            <div
-              class="ad-image"
-              style="background-image: url('/assets/adFusca/fusca7.png')"
-            ></div>
-            <div class="ad-title">Volkswagen Fusca 67 - Extra</div>
-            <div class="ad-price">R$ 36.900,00</div>
-          </div>
-          <div class="ad-item">
-            <div
-              class="ad-image"
-              style="background-image: url('/assets/adFusca/fusca8.png')"
-            ></div>
-            <div class="ad-title">Volkswagen Fusca 68</div>
-            <div class="ad-price">R$ 34.450,00</div>
-          </div>
-          <div class="ad-item">
-            <div
-              class="ad-image"
-              style="background-image: url('/assets/adFusca/fusca9.png')"
-            ></div>
-            <div class="ad-title">Volkswagen Fusca 66</div>
-            <div class="ad-price">R$ 35.450,00</div>
-          </div>
+          @if(count($relatedAds) > 0)
+            @foreach ($relatedAds as $ad)
+               <x-ads-card :ads="$ad" :isEdit="false"></x-ads-card>
+            @endforeach
+          @else
+            <div class="no-ads">Nenhum anúncio relacionado</div>
+          @endif
         </div>
       </div>
     </main>

@@ -8,6 +8,16 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class AdService {
+
+    public static function getAllAds() {
+        $ads = Advertise::all();
+        $ads->each(function ($ad) {
+            $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
+            $ad['images'] = $ad->images;
+        });
+        return $ads;
+
+    }
     public static function getSingleAd(String $slug) {
         $ad = Advertise::where(["slug" => $slug])->first();
         if(!$ad){
@@ -21,8 +31,18 @@ class AdService {
         $ad['category'] = $category->name;
         $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
         $ad['images'] = $ad->images;
+        
 
         return $ad;
+    }
+
+    public static function getRelatedAds($categoryId, $stateId, $adId) {
+        $relatedAds = Advertise::where(["category_id" => $categoryId])->where(["state_id" => $stateId])->where("id", "<>", $adId)->orderBy("created_at", "desc")->orderBy("views", "desc")->limit(4)->get();
+        $relatedAds->each(function ($ad) {
+            $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
+            $ad['images'] = $ad->images;
+        });
+        return $relatedAds;
     }
 
     public static function deleteAd($id) {
