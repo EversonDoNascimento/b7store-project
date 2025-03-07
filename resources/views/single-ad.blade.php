@@ -24,13 +24,13 @@
           <div class="ad-page-title">{{ $advertise['title'] }}</div>
           <div class="ad-page-date">Publicado em {{$advertise['created_at']->format('d/m/Y')}} às {{$advertise['created_at']->format('H:i')}}</div>
           <div class="ad-page-price">R$ {{number_format(num: $advertise['price'], decimals: 2, decimal_separator: ',', thousands_separator: '.')}}</div>
-          <div class="contact">
           @if($advertise['negotiable'] === 1)
-            <img src="{{asset('assets/icons/wppIcon.png')}}" />
-            <div class="contact-text">Negociável</div>
-          </div>
+            <div class="contact">
+              <img src="{{asset('assets/icons/wppIcon.png')}}" />
+              <div class="contact-text">Negociável</div>
+            </div>
             <div class="negociable">*Esse valor poderá ser negociado.</div>
-             @endif
+          @endif
           <div class="ad-page-text">
             {{ $advertise['description'] }}
           </div>
