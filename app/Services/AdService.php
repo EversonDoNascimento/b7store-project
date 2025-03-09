@@ -54,6 +54,7 @@ class AdService {
         $query = Advertise::query();
         if($categoryId) {
             $query->where(["category_id" => $categoryId]);
+            
         }
         if($stateId) {
             $query->where(["state_id" => $stateId]);
@@ -63,7 +64,7 @@ class AdService {
             $query->where("title", 'like', "%$searchName%");
         }
 
-        return $query->get();
+        return $query->paginate(12);
     }
 
  

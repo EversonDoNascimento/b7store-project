@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('assets/style.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/adsListStyle.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/myAdsStyle.css')}}" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>B7Store - Anúncios</title>
   </head>

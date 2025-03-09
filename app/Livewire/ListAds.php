@@ -6,10 +6,11 @@ use App\Services\AdService;
 use App\Services\CategoryService;
 use App\Services\StateService;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListAds extends Component
 {
-    public $filteredAds;
+    use WithPagination;
     public $search;
     public $categories;
     public $states;
@@ -18,11 +19,18 @@ class ListAds extends Component
     public $stateSelected;
     public function render()
     {
-      
-        $this->filteredAds = AdService::filteredAds($this->categorySelected, $this->stateSelected, $this->search);
-        return view('livewire.list-ads');
+     
+        $ads = AdService::filteredAds($this->categorySelected, $this->stateSelected, $this->search);
+        
+
+        return view('livewire.list-ads', [
+            'ads' => $ads
+        ]);
     }
 
+    public function updated(){
+        $this->resetPage();
+    }
     public function mount(){
         
         $this->categories = CategoryService::getAllCategories();
