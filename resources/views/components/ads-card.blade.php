@@ -34,7 +34,7 @@
         </div>
         <div
         class="ad-image"
-        style="background-image: url({{ $ads['main_image']['url'] ?? 'https://placehold.co/600x400'}})"
+        style="background-image: url({{ $ads->images->first()->url ?? 'https://placehold.co/600x400'}})"
         ></div>
     </div>
         <div class="ad-title">{{$ads->title}}</div>

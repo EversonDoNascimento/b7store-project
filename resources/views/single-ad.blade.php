@@ -18,7 +18,7 @@
     <x-base.header></x-base.header>
     <main>
       <div class="ad-area">
-        @livewire('gallery', ['advertise' => $advertise])
+        @livewire('gallery', ['images' => $advertise->images])
         <div class="ad-area-right">
           <div class="categories-state">{{ $advertise['state'] ?? "" }} / {{ $advertise['category'] ?? "" }}</div>
           <div class="ad-page-title">{{ $advertise['title'] }}</div>

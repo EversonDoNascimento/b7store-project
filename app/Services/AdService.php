@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AdService {
 
+
     public static function getAllAds() {
         $ads = Advertise::all();
-        $ads->each(function ($ad) {
-            $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
-            $ad['images'] = $ad->images;
-        });
+        // $ads->each(function ($ad) {
+        //     $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
+        //     $ad['images'] = $ad->images;
+        // });
         return $ads;
 
     }
@@ -29,19 +30,13 @@ class AdService {
         $category = $ad->category;
         $ad['state'] = $state->name; 
         $ad['category'] = $category->name;
-        $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
-        $ad['images'] = $ad->images;
-        
+  
 
         return $ad;
     }
 
     public static function getRelatedAds($categoryId, $stateId, $adId) {
         $relatedAds = Advertise::where(["category_id" => $categoryId])->where(["state_id" => $stateId])->where("id", "<>", $adId)->orderBy("created_at", "desc")->orderBy("views", "desc")->limit(4)->get();
-        $relatedAds->each(function ($ad) {
-            $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
-            $ad['images'] = $ad->images;
-        });
         return $relatedAds;
     }
 
@@ -54,4 +49,22 @@ class AdService {
             return \redirect()->to("/")->with('error', 'Anúncio não encontrado');
         }
     }
+
+    public static function filteredAds($categoryId , $stateId, $searchName) {
+        $query = Advertise::query();
+        if($categoryId) {
+            $query->where(["category_id" => $categoryId]);
+        }
+        if($stateId) {
+            $query->where(["state_id" => $stateId]);
+        }
+        
+        if($searchName){
+            $query->where("title", 'like', "%$searchName%");
+        }
+
+        return $query->get();
+    }
+
+ 
 }

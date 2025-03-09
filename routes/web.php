@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("ad/{slug}", [AdController::class, "show"])->name("ad.show");
-
+Route::get("/list", [AdController::class, "list"])->name("ad.list");
 Route::middleware(['auth'])->group(function () {
     
 

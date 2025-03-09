@@ -1,0 +1,47 @@
+    <main>
+      <div class="hero-area">
+        <div class="search-area-adsList">
+          <input
+            class="search-text"
+            type="text"
+            placeholder="Estou procurando por..."
+            wire:model.live.debounce.1000ms="search"
+          />
+          <p>{{$search}}</p>
+          <div class="options-area">
+            <div class="categories-area">
+              <p>Categoria</p>
+              <select wire:model.live="categorySelected" class="categories-options">
+                <option selected hidden disabled value="">Todas</option>
+                @foreach ($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+           
+              </select>
+            </div>
+            <div class="states-area">
+              <p>Estados</p>
+              <select wire:model.live="stateSelected" class="states">
+                <option selected hidden disabled value="">Todos</option>
+                @foreach($states as $state)
+                    <option value="{{$state->id}}">{{$state->name}}</option>
+                @endforeach
+              </select>
+            </div>
+            <button class="search-mobile-button">Procurar</button>
+          </div>
+        </div>
+      </div>
+      <div class="ads">
+        <div class="ads-title">Anúncios recentes</div>
+        <div class="ads-area">
+            @if(count($filteredAds) > 0)
+            @foreach ($filteredAds as $ad)
+               <x-ads-card :ads="$ad" :isEdit="false"></x-ads-card>
+            @endforeach
+            @else
+                <div class="no-ads">Nenhum anúncio relacionado</div>
+            @endif
+        </div>
+      </div>
+    </main>

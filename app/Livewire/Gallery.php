@@ -6,17 +6,23 @@ use Livewire\Component;
 
 class Gallery extends Component
 {
-    public $advertise;
+
+
+    public $images;
+    public $featured;
     public function render()
     {
         return view('livewire.gallery');
     }
 
-    public function mount(){
+    public function mount($images){
+        $this->images = $images;
+        $this->featured = $images->first()->url;
        
     }
 
     public function setMainImage($image){
-        $this->advertise['main_image'] = $image;
+        $this->featured = $image['url'];
+
     }
 }
