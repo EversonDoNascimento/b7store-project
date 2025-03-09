@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Advertise;
-use App\Models\AdvertiseImage;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +11,6 @@ class AdService {
 
     public static function getAllAds() {
         $ads = Advertise::all();
-        // $ads->each(function ($ad) {
-        //     $ad['main_image'] = AdvertiseImage::where(["advertise_id" => $ad->id])->where(["featured" => 1])->first();
-        //     $ad['images'] = $ad->images;
-        // });
         return $ads;
 
     }
