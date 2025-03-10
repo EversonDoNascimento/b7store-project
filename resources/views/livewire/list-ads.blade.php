@@ -7,7 +7,6 @@
             placeholder="Estou procurando por..."
             wire:model.live.debounce.1000ms="search"
           />
-          <p>{{$search}}</p>
           <div class="options-area">
             <div class="categories-area">
               <p>Categoria</p>

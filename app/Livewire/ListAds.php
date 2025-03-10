@@ -17,6 +17,12 @@ class ListAds extends Component
 
     public $categorySelected;
     public $stateSelected;
+
+    protected $queryString = [
+        'search' => ['as' => 's'],
+        'categorySelected' => ['as' => 'c'],
+        'stateSelected' => ['as' => 'st'],
+    ];
     public function render()
     {
      
