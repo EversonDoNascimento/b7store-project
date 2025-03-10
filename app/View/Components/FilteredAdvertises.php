@@ -16,8 +16,7 @@ class FilteredAdvertises extends Component
     public $products;
     public function __construct()
     {
-        //
-        //$advertises = Advertise::all();
+    
         $this->products = AdService::getAllAds();
  
     }

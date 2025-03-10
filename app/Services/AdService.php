@@ -10,7 +10,7 @@ class AdService {
 
 
     public static function getAllAds() {
-        $ads = Advertise::all();
+        $ads = Advertise::orderBy("created_at", "desc")->limit(4)->get();
         return $ads;
 
     }
@@ -59,7 +59,7 @@ class AdService {
             $query->where("title", 'like', "%$searchName%");
         }
 
-        return $query->paginate(12);
+        return $query->orderBy("created_at", "desc")->paginate(4);
     }
 
  
