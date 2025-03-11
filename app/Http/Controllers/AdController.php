@@ -21,4 +21,13 @@ class AdController extends Controller
 
         return view("single-ad", ["advertise" => $ad, "relatedAds" => $relatedAds]);
     }
+
+    public function category(String $slug){
+        $category = CategoryService::getSingleCategory($slug);
+        if(!$category){
+            return redirect()->route("home");
+        }
+       $ads = AdService::getAdsByCategory($category->id);
+       return view("category-list", ["category" => $category, "ads" => $ads]);
+    }
 }

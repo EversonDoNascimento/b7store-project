@@ -62,5 +62,10 @@ class AdService {
         return $query->orderBy("created_at", "desc")->paginate(4);
     }
 
+    public static function getAdsByCategory($categoryId) {
+        $ads = Advertise::where("category_id", $categoryId)->with('images')->orderBy("created_at", "desc")->paginate(8);
+        return $ads;
+    }
+
  
 }
