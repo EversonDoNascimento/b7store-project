@@ -55,6 +55,7 @@
     border: 1.5px solid #e7e9ed;
     width: 100%;
     aspect-ratio: 1/1;
+    position: relative;
 }
 .ad-image-area .ad-image {
     width: 100%;
@@ -69,7 +70,9 @@
     display: flex;
     justify-content: end;
     z-index: 10;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 10px;
     padding-right: 16px;
     margin-bottom: -54px;
 }
@@ -82,6 +85,18 @@
     justify-content: center;
     cursor: pointer;
     margin-left: 8px;
+}
+
+.pill {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 10px;
+    right: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 @media (max-width: 1024px) {
     .myAds-ads-area {

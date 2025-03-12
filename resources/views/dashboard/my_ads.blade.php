@@ -25,6 +25,7 @@
             @else
             @foreach ($advertises as $ads)
                <x-ads-card :ads="$ads" :isEdit="true"></x-ads-card>
+      
             @endforeach
             @endif
             

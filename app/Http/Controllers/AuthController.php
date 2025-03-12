@@ -34,7 +34,7 @@ class AuthController extends Controller
             return \view('auth.login', $data);
         }
         
-        return \redirect("/");
+        return \redirect()->route("dashboard.my_account");
     }
 
     public function logout(){
