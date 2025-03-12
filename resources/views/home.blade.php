@@ -19,6 +19,7 @@
         <!-- Hero -->
     <x-hero></x-hero>
       <!-- /Hero -->
+    <livewire:categories-list></livewire:categories-list>
 
     <x-filtered-advertises></x-filtered-advertises>
     </main>

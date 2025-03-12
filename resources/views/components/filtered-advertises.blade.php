@@ -27,7 +27,6 @@
     </div>
 </div> -->
 
-<livewire:categories-list></livewire:categories-list>
 <div class="ads">
     <div class="ads-title">Anúncios recentes</div>
     <div class="ads-area">
