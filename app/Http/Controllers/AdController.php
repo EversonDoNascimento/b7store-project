@@ -30,4 +30,8 @@ class AdController extends Controller
        $ads = AdService::getAdsByCategory($category->id);
        return view("category-list", ["category" => $category, "ads" => $ads]);
     }
+
+    public function create_advertise(){
+        return view("dashboard.ad_create");
+    }
 }

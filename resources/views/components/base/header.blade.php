@@ -4,17 +4,17 @@
     <div class="header-area-right">
         @if (Auth::check())
             <a href="{{route('dashboard.my_account')}}"  class="my-account">
-            <img src="assets/icons/userIcon.png" />
+            <img src="{{ asset('assets/icons/userIcon.png') }}" />
             Minha Conta
             </a>
         
+             <a href="{{ route('ad.create') }} " class="announce-now">Anunciar agora →</a>
         @else
             <a href="{{route('auth.login')}}"  class="my-account">
             <img src="{{asset('assets/icons/userIcon.png')}}" />
             Login
             </a>
         @endif
-        <a href="" class="announce-now">Anunciar agora →</a>
         <img class="menu-icon" src="assets/icons/menuIcon.png" alt="Menu" />
         <div class="menu-mobile">
         <a href="{{route('dashboard.my_account')}}" class="my-account-mobile">
