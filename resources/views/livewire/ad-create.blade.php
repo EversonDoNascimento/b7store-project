@@ -31,45 +31,59 @@
         </div>
         </div>
         <div class="newAd-area-right">
-        <form class="newAd-form">
+        <form wire:submit="save" class="newAd-form">
             <div class="title-area">
             <div class="title-label">Título do anúncio</div>
-            <input type="text" placeholder="Digite o título do anúncio" />
+                <div style="margin-bottom: 20px;">
+                    <input style="margin-bottom: 0;" type="text" wire:model="title" placeholder="Digite o título do anúncio" />
+                    @error('title') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="value-area">
             <div class="value-label">
                 <div class="value-area-text">Valor</div>
-                <input type="text" placeholder="Digite o valor" />
+                <div>
+                    <input type="text" wire:model="value" placeholder="Digite o valor" />
+                    @error('value') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="negotiable-area">
                 <div class="negotiable-label">Negociável?</div>
-                <select>
-                <option selected>Não</option>
-                <option>Sim</option>
-                </select>
+                <div>
+                    <select wire:model="negotiable">
+                        <option selected>Não</option>
+                        <option>Sim</option>
+                    </select>
+                    @error('negotiable') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
+                </div>
+
             </div>
             </div>
             <div class="newAd-categories-area">
             <div class="newAd-categories-label">Categorias</div>
-            <select class="newAd-categories">
-                <option selected hidden disabled value="">
-                Selecione uma categoria
-                </option>
-                <option value="cars">Carros</option>
-                <option value="eletronics">Eletrônicos</option>
-                <option value="clothes">Roupas</option>
-                <option value="sports">Esporte</option>
-                <option value="babies">Bebês</option>
-            </select>
+                <div style="margin-bottom: 20px;">
+                    <select  style="margin-bottom: 0;" wire:model="category" class="newAd-categories">
+                        <option selected hidden disabled value="">Selecione uma categoria</option>
+                        @forEach($loadedCategories as $category)
+                            <option value="{{ $category->id }}">{{$category->name}}</option>
+                        @endForEach
+                    </select>
+                   @error('category') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="description-area">
             <div class="description-label">Descrição</div>
-            <textarea
-                class="description-text"
-                placeholder="Digite a descrição do anúncio"
-            ></textarea>
+                <div style="margin-bottom: 40px;">
+                    <textarea
+                       style="margin-bottom: 0;"
+                        wire:model="description"
+                        class="description-text"
+                        placeholder="Digite a descrição do anúncio"
+                    ></textarea>
+                  @error('description') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
-            <button class="newAd-button">Criar anúncio</button>
+            <button class="newAd-button" type="submit">Criar anúncio</button>
         </form>
         </div>
     </div>

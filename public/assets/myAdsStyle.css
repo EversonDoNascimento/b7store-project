@@ -98,6 +98,15 @@
     padding: 4px 8px;
     border-radius: 4px;
 }
+
+.errorMessage {
+    text-align: justify;
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+}
 @media (max-width: 1024px) {
     .myAds-ads-area {
         grid-template-columns: repeat(2, 1fr);
