@@ -6,32 +6,35 @@
         <div class="area-left-up">
             <div class="area-left-up-title">Imagens</div>
             <div class="area-left-up-img">
-            <img src="{{ asset('assets/icons/imageIcon.png') }}" />
-            <div class="area-left-up-img-text">
+                @if($images && count($images) <= 5)
+                    @if($selectedImage)
+                        <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
+                    @else
+                        <img style="max-width: 100%; max-height: 100%;" src="{{ $images[0]->temporaryUrl() }}" />
+                    @endif
+                @else
+                    <img src="{{ asset('assets/icons/imageIcon.png') }}" />
+                @endif
+            <div @click="document.getElementById('images').click()" class="area-left-up-img-text">
+                <input id="images" type="file" wire:model="images" multiple accept="image/*" style="display: none;">
                 <span>Clique aqui</span> para enviar uma imagem
             </div>
             </div>
         </div>
         <div class="area-left-bottom">
-            <div class="smallpics">
-            <img src="{{ asset('assets/icons/imageSmallIcon.png') }}" />
-            </div>
-            <div class="smallpics">
-            <img src="{{ asset('assets/icons/imageSmallIcon.png') }}" />
-            </div>
-            <div class="smallpics">
-            <img src="{{ asset('assets/icons/imageSmallIcon.png') }}" />
-            </div>
-            <div class="smallpics">
-            <img src="{{ asset('assets/icons/imageSmallIcon.png') }}" />
-            </div>
-            <div class="smallpics">
-            <img src="{{ asset('assets/icons/imageSmallIcon.png') }}" />
-            </div>
+            @if($images && count($images) <= 5)
+                @forEach($images as $index => $image)
+                    <div wire:click="setSelectedImage({{ $index }})" class="smallpics">
+                        <img  style="max-width: 100%; max-height: 100%;" src="{{ $image->temporaryUrl() }}" />
+                    </div>
+                @endForEach
+            @endif
+            @error('images') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
         </div>
         </div>
         <div class="newAd-area-right">
         <form wire:submit="save" class="newAd-form">
+          
             <div class="title-area">
             <div class="title-label">Título do anúncio</div>
                 <div style="margin-bottom: 20px;">
