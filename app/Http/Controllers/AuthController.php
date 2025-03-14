@@ -28,7 +28,6 @@ class AuthController extends Controller
 
     public function login_action(LoginRequest $request){
         $dataInput = $request->only(["email", "password"]);
-
         if(!Auth::attempt($dataInput)){
             $data['message'] = "Email or Password Invalid";
             return \view('auth.login', $data);
@@ -39,7 +38,7 @@ class AuthController extends Controller
 
     public function logout(){
         Auth::logout();
-        return \redirect(route("auth.login"));
+        return \redirect(route("login"));
     }
   
 }

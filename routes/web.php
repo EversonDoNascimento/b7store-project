@@ -4,8 +4,8 @@ use App\Http\Controllers\AdController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StateController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get("ad/{slug}", [AdController::class, "show"])->name("ad.show");
 Route::get("/list", [AdController::class, "list"])->name("ad.list");
@@ -13,7 +13,6 @@ Route::get("/category/{slug}", [AdController::class, "category"])->name("ad.cate
 
 Route::middleware(['auth'])->group(function () {
     
-
     Route::get("/select-state", [StateController::class, 'index'])->name('state.select-state');
     Route::post("/state-action", [StateController::class, 'register_state'])->name('state.state_action');
 
@@ -38,7 +37,7 @@ Route::get('/', function () {
 */
 Route::get('/login', function () {
     return view('auth.login');
-})->name('auth.login');
+})->name('login');
 
 
 Route::post("/login", [AuthController::class, 'login_action'])->name('auth.login_action');

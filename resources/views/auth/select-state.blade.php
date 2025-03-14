@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <a href="{{route('auth.login')}}" class="back-button">← Voltar</a>
+    <a href="{{route('login')}}" class="back-button">← Voltar</a>
     <div class="login-page">
       <div class="login-area">
         <h3 class="login-title">B7Store</h3>

@@ -10,7 +10,7 @@
         
              <a href="{{ route('ad.create') }} " class="announce-now">Anunciar agora →</a>
         @else
-            <a href="{{route('auth.login')}}"  class="my-account">
+            <a href="{{route('login')}}"  class="my-account">
             <img src="{{asset('assets/icons/userIcon.png')}}" />
             Login
             </a>

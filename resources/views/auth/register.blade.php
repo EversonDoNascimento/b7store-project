@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <a href="{{route('auth.login')}}" class="back-button">← Voltar</a>
+    <a href="{{route('login')}}" class="back-button">← Voltar</a>
     <div class="login-page">
       <div class="login-area">
         <h3 class="login-title">B7Store</h3>
@@ -53,7 +53,7 @@
           <button class="login-button">Cadastrar</button>
         </form>
         <div class="register-area">
-          Já tem cadastro? <a href="{{route('auth.login')}}">Fazer Login</a>
+          Já tem cadastro? <a href="{{route('login')}}">Fazer Login</a>
         </div>
       </div>
       <div class="terms">

@@ -101,6 +101,7 @@
 
 .errorMessage {
     text-align: justify;
+    margin-top: 5px;
     color: #ff0000;
     font-size: 20px;
     font-weight: 500;
