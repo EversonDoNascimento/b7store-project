@@ -26,7 +26,7 @@ class AdCreate extends Component
 
     #[Validate([
         'images' => 'required|array|min:1|max:5',
-        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
     ])]
     public $images;
 
