@@ -15,18 +15,18 @@ class AdCreate extends Component
     public $loadedCategories;
     #[Validate('required')]
     public $title;
-    #[Validate('required')]
+    #[Validate('required|numeric|integer|min:1')]
     public $value;
-    #[Validate('required')]
+    #[Validate('required|in:0,1')]
     public $negotiable;
-    #[Validate('required')]
+    #[Validate('required|exists:categories,id')]
     public $category;
     #[Validate('required')]
     public $description;
 
     #[Validate([
         'images' => 'required|array|min:1|max:5',
-        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120'
     ])]
     public $images;
 
@@ -45,7 +45,6 @@ class AdCreate extends Component
     }
 
     public function setSelectedImage($index){
-        // return \dd($this->images[$index]);
         if($this->images[$index]){
             $this->selectedImage = $this->images[$index];
         }

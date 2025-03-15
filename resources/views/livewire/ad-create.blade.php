@@ -57,8 +57,9 @@
                 <div class="negotiable-label">Negociável?</div>
                 <div>
                     <select name="negotiable" wire:model="negotiable">
-                        <option selected>Não</option>
-                        <option>Sim</option>
+                        <option value="default" selected>Selecione uma opção</option>
+                        <option value={{ 0 }}>Não</option>
+                        <option value={{ 1 }}>Sim</option>
                     </select>
                     @error('negotiable') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
                 </div>
