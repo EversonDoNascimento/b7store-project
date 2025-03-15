@@ -15,7 +15,7 @@ class AdCreate extends Component
     public $loadedCategories;
     #[Validate('required')]
     public $title;
-    #[Validate('required|numeric|integer|min:1')]
+    #[Validate('required|min:0')]
     public $value;
     #[Validate('required|in:0,1')]
     public $negotiable;
@@ -40,7 +40,10 @@ class AdCreate extends Component
 
     public function save(){
         $this->validate();
-        return dd($this->title, $this->value, $this->negotiable, $this->category, $this->description, $this->images, $this->selectedImage);
+        foreach($this->images as $image){
+            $image->store('images', 'public');
+        }
+        return dd($this->title, str_replace(',', '.', str_replace('.', '', $this->value)), $this->negotiable, $this->category, $this->description, $this->images, $this->selectedImage);
         return \redirect(route("ad.create"));
     }
 
@@ -54,5 +57,15 @@ class AdCreate extends Component
         if($propertyName == "images"){
             $this->selectedImage = $this->images[0];
         }
+        // if($propertyName == "value" && $this->value){
+        //     $this->value = \number_format(strval((int) $this->value) > 0 ? $this->value : 0, 2, ',', '.');
+        // }
+       
     }
+
+    public function updatedValue()
+    {
+        $this->value = $this->value !== '' && \strval((int) $this->value) > 0 ? number_format((float) str_replace(',', '.', str_replace('.', '', $this->value)), 2, ',', '.') : '';
+    }
+
 }

@@ -10,11 +10,7 @@
                     <div class="pill-main-image">Esta será a imagem principal</div>
                 @endif
                 @if($images && count($images) <= 5)
-                    @if($selectedImage)
-                        <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
-                    @else
-                        <img style="max-width: 100%; max-height: 100%;" src="{{ $images[0]->temporaryUrl() }}" />
-                    @endif
+                    <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
                 @else
                     <img src="{{ asset('assets/icons/imageIcon.png') }}" />
                 @endif
@@ -49,7 +45,7 @@
             <div class="value-label">
                 <div class="value-area-text">Valor</div>
                 <div>
-                    <input type="text" wire:model="value" name="value" placeholder="Digite o valor" />
+                    <input type="text" value="{{ $value }}" wire:model.live.debounce.1000ms="value" name="value" placeholder="Digite o valor" />
                     @error('value') <span class="errorMessage">{{ $message }}</span> @enderror
                 </div>
             </div>
