@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Models\Advertise;
+use App\Models\AdvertiseImage;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Nette\Utils\Random;
 
 class AdService {
 
@@ -65,6 +67,33 @@ class AdService {
     public static function getAdsByCategory($categoryId) {
         $ads = Advertise::where("category_id", $categoryId)->with('images')->orderBy("created_at", "desc")->paginate(8);
         return $ads;
+    }
+
+    public static function createAd($ad){
+        $newAd = new Advertise();
+        $category = CategoryService::getSingleCategoryById($ad->category);
+        
+        // Defined the advertise values
+        $newAd->title = $ad->title;
+        $newAd->price = str_replace(',', '.', str_replace('.', '', $ad->value));
+        $newAd->description = $ad->description;
+        $newAd->category_id = $ad->category;
+        $newAd->slug = $category->slug . "-" . Random::generate(100);
+        $newAd->state_id = Auth::user()->state_id;
+        $newAd->contact = "55819888888";
+        $newAd->negotiable = $ad->negotiable;
+        $newAd->views = 0;
+        $newAd->user_id = Auth::user()->id;
+        // Defined the images of advertise
+        $newAd->save();
+        foreach($ad->images as $image){
+            $imageAdvertise = new AdvertiseImage();
+            $imageAdvertise->url = $image->store('images', 'public');
+            $imageAdvertise->featured = $image->temporaryUrl() == $ad->selectedImage->temporaryUrl() ? true : false;
+            $imageAdvertise->advertise_id = $newAd->id;
+            $imageAdvertise->save();
+        }
+     
     }
 
  

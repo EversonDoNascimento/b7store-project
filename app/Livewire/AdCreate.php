@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\AdService;
 use App\Services\CategoryService;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -40,10 +41,7 @@ class AdCreate extends Component
 
     public function save(){
         $this->validate();
-        foreach($this->images as $image){
-            $image->store('images', 'public');
-        }
-        return dd($this->title, str_replace(',', '.', str_replace('.', '', $this->value)), $this->negotiable, $this->category, $this->description, $this->images, $this->selectedImage);
+        AdService::createAd($this);
         return \redirect(route("ad.create"));
     }
 
@@ -57,10 +55,6 @@ class AdCreate extends Component
         if($propertyName == "images"){
             $this->selectedImage = $this->images[0];
         }
-        // if($propertyName == "value" && $this->value){
-        //     $this->value = \number_format(strval((int) $this->value) > 0 ? $this->value : 0, 2, ',', '.');
-        // }
-       
     }
 
     public function updatedValue()

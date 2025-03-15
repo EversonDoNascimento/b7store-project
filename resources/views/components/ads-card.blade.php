@@ -15,7 +15,7 @@
         <div class="ad-image-area">
             <div
             class="ad-image"
-            style="background-image: url({{ $ads->images->first()->url ?? 'https://placehold.co/600x400'}})"
+            style="background-image: url({{ isset($ads->images->first()->url) ? asset('/storage/' .$ads->images->first()->url) : 'https://placehold.co/600x400'}})"
             ></div>
         </div>
         <div class="ad-title">{{$ads->title}}</div>
@@ -29,7 +29,7 @@
         <div class="ad-image-area">
             <div
             class="ad-image"
-            style="background-image: url({{ $ads->images->first()->url ?? 'https://placehold.co/600x400'}})"
+            style="background-image: url({{ isset($ads->images->first()->url) ? asset('/storage/' .$ads->images->first()->url) : 'https://placehold.co/600x400'}})"
             ></div>
         </div>
         <div class="ad-title">{{$ads->title}}</div>
