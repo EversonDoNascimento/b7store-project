@@ -39,7 +39,7 @@
             <div class="title-area">
             <div class="title-label">Título do anúncio</div>
                 <div style="margin-bottom: 20px;">
-                    <input style="margin-bottom: 0;" type="text" wire:model="title" placeholder="Digite o título do anúncio" />
+                    <input style="margin-bottom: 0;" type="text" name="title" wire:model="title" placeholder="Digite o título do anúncio" />
                     @error('title') <span class="errorMessage">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -47,14 +47,14 @@
             <div class="value-label">
                 <div class="value-area-text">Valor</div>
                 <div>
-                    <input type="text" wire:model="value" placeholder="Digite o valor" />
+                    <input type="text" wire:model="value" name="value" placeholder="Digite o valor" />
                     @error('value') <span class="errorMessage">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="negotiable-area">
                 <div class="negotiable-label">Negociável?</div>
                 <div>
-                    <select wire:model="negotiable">
+                    <select name="negotiable" wire:model="negotiable">
                         <option selected>Não</option>
                         <option>Sim</option>
                     </select>
@@ -66,8 +66,8 @@
             <div class="newAd-categories-area">
             <div class="newAd-categories-label">Categorias</div>
                 <div style="margin-bottom: 20px;">
-                    <select  style="margin-bottom: 0;" wire:model="category" class="newAd-categories">
-                        <option selected hidden disabled value="">Selecione uma categoria</option>
+                    <select name="category"  style="margin-bottom: 0;" wire:model="category" class="newAd-categories">
+                        <option selected value="default">Selecione uma categoria</option>
                         @forEach($loadedCategories as $category)
                             <option value="{{ $category->id }}">{{$category->name}}</option>
                         @endForEach
@@ -79,7 +79,8 @@
             <div class="description-label">Descrição</div>
                 <div style="margin-bottom: 40px;">
                     <textarea
-                       style="margin-bottom: 0;"
+                        name="description"
+                        style="margin-bottom: 0;"
                         wire:model="description"
                         class="description-text"
                         placeholder="Digite a descrição do anúncio"

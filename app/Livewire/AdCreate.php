@@ -40,8 +40,7 @@ class AdCreate extends Component
 
     public function save(){
         $this->validate();
-        return dd($this->images);
-        return dd($this->title, $this->value, $this->negotiable, $this->category, $this->description);
+        return dd($this->title, $this->value, $this->negotiable, $this->category, $this->description, $this->images, $this->selectedImage);
         return \redirect(route("ad.create"));
     }
 
