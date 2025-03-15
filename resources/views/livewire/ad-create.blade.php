@@ -6,8 +6,10 @@
         <div class="area-left-up">
             <div class="area-left-up-title">Imagens</div>
             <div class="area-left-up-img">
-                @if($images && count($images) <= 5)
+                @if($selectedImage)
                     <div class="pill-main-image">Esta será a imagem principal</div>
+                @endif
+                @if($images && count($images) <= 5)
                     @if($selectedImage)
                         <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
                     @else

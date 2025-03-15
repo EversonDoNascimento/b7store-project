@@ -53,7 +53,7 @@ class AdCreate extends Component
 
     public function updated($propertyName){
         if($propertyName == "images"){
-            $this->selectedImage = null;
+            $this->selectedImage = $this->images[0];
         }
     }
 }
