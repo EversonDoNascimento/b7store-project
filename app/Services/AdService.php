@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Advertise;
 use App\Models\AdvertiseImage;
+use App\Utils\DeleteLocalImages;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
@@ -39,11 +40,14 @@ class AdService {
 
     public static function deleteAd($id) {
         try {
-            Advertise::where(["id" => $id])->where(["user_id" => Auth::user()->id])->first();
-            return \redirect()->to("/")->with('success', 'Anúncio deletado com sucesso!');
-
+            $ad = Advertise::where(["id" => $id])->where(["user_id" => Auth::user()->id])->first();
+            foreach($ad->images as $image) {
+                DeleteLocalImages::deleteImage($image->url);
+            };
+            $ad->delete();
+            return true;
         }catch(Exception $e) {
-            return \redirect()->to("/")->with('error', 'Anúncio não encontrado');
+            return false;
         }
     }
 

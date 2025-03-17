@@ -8,7 +8,11 @@ use App\Services\CategoryService;
 class AdController extends Controller
 {
     public function ad_delete($id){
-        AdService::deleteAd($id);
+        $resultDelete = AdService::deleteAd($id);
+        if(!$resultDelete){
+            return redirect()->route("dashboard.my_ads")->with("error", "Erro ao deletar anuncio");
+        }
+        return redirect()->route("dashboard.my_ads")->with("success", "Anuncio deletado com sucesso");
     }
 
     public function list(){
