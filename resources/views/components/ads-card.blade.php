@@ -15,13 +15,14 @@
         <div class="ad-image-area">
             <div
             class="ad-image"
-            style="background-image: url({{ isset($ads->images->first()->url) ? asset('/storage/' .$ads->images->first()->url) : 'https://placehold.co/600x400'}})"
+            style="background-image: url({{ isset($ads->images->where('featured', '=', '1')->first()['url']) ? asset('/storage/' .$ads->images->where('featured', '=', '1')->first()['url']) : 'https://placehold.co/600x400'}})"
             ></div>
         </div>
         <div class="ad-title">{{$ads->title}}</div>
         <div class="ad-price">R$ {{number_format(num: $ads->price, decimals: 2, decimal_separator: ',', thousands_separator: '.')}}</div>
     </div>
 @else
+ 
     <a href="{{route('ad.show', ['slug' => $ads->slug])}}" style="{{ !$isEdit ? 'cursor: pointer; position: relative;' : ''}}; text-decoration: none" class="my-ad-item">
         @if(Auth::user()?-> id !== null && !empty($ads) && $ads->user_id == Auth::user()->id && isset($isEdit) && $isEdit === false)
             <div class="pill">Meu anúncio</div>
@@ -29,7 +30,7 @@
         <div class="ad-image-area">
             <div
             class="ad-image"
-            style="background-image: url({{ isset($ads->images->first()->url) ? asset('/storage/' .$ads->images->first()->url) : 'https://placehold.co/600x400'}})"
+            style="background-image: url({{ isset($ads->images->where('featured', '=', '1')->first()['url']) ? asset('/storage/' .$ads->images->where('featured', '=', '1')->first()['url']) : 'https://placehold.co/600x400'}})"
             ></div>
         </div>
         <div class="ad-title">{{$ads->title}}</div>
