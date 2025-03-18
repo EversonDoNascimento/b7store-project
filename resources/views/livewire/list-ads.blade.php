@@ -41,7 +41,7 @@
                       <div class="ad-image-area">
                           <div
                           class="ad-image"
-                          style="background-image: url({{ $ad->images->first()->url ?? 'https://placehold.co/600x400'}})"
+                          style="background-image: url({{ isset($ad->images->where('featured', '=', '1')->first()['url']) ? asset('/storage/'. $ad->images->where('featured', '=', '1')->first()['url']) : 'https://placehold.co/600x400'}})"
                           ></div>
                       </div>
                           <div class="ad-title">{{$ad['title']}}</div>
