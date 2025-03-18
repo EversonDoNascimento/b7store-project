@@ -100,5 +100,8 @@ class AdService {
      
     }
 
+    public static function  editAd($ad){
+
+    }
  
 }

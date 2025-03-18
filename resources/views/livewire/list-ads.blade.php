@@ -35,7 +35,6 @@
         <div class="ads-title">Anúncios recentes</div>
         <div class="ads-area">
             @if(count($ads) > 0)
-            
               @foreach ($ads as $ad)
                 <a href="{{route('ad.show', ['slug' => $ad['slug']])}}" text-decoration: none" class="my-ad-item">
                       <div class="ad-image-area">

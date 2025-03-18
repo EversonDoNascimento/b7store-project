@@ -15,6 +15,10 @@ class AdController extends Controller
         return redirect()->route("dashboard.my_ads")->with("success", "Anuncio deletado com sucesso");
     }
 
+    public function ad_edit($id){
+        return view('dashboard.ad_edit', ['id' => $id]);
+    }
+
     public function list(){
        
         return view("list");

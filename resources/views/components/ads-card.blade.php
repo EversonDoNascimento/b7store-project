@@ -7,7 +7,7 @@
                     </a>
                 </div>
                 <div class="ad-button">
-                    <a href="{{route('ad.delete', ['id' => $ads->id])}}" >
+                    <a href="{{route('ad.edit', ['id' => $ads->id])}}" >
                         <img style="max-width: 40px;" src="assets/icons/editIcon.png" />
                     </a>
                 </div>

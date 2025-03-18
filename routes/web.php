@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/my-ads', [DashboardController::class, 'my_ads'])->name('dashboard.my_ads');
     Route::get("/ad/delete/{id}", [AdController::class, "ad_delete"])->name("ad.delete");
+    Route::get("/ad/edit/{id}", [AdController::class, "ad_edit"])->name("ad.edit");
 });
 // Pages
 
