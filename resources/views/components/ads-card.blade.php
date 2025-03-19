@@ -2,12 +2,12 @@
     <div href="{{route('ad.show', ['slug' => $ads->slug])}}" style="{{ !$isEdit ? 'cursor: pointer; position: relative;' : ''}}; text-decoration: none" class="my-ad-item">         
             <div  class="ad-buttons">
                 <div class="ad-button">
-                    <a href="{{route('ad.delete', ['id' => $ads->id])}}" >
+                    <a href="{{route('ad.delete', Crypt::encrypt($ads->id))}}" >
                         <img  src="{{ asset('assets/icons/deleteIcon.png') }}" />
                     </a>
                 </div>
                 <div class="ad-button">
-                    <a href="{{route('ad.edit', ['id' => $ads->id])}}" >
+                    <a href="{{route('ad.edit', Crypt::encrypt($ads->id))}}" >
                         <img style="max-width: 40px;" src="assets/icons/editIcon.png" />
                     </a>
                 </div>

@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Services\AdService;
 use App\Services\CategoryService;
+use App\Utils\DecryptId;
+use Illuminate\Support\Facades\Auth;
 
 class AdController extends Controller
 {
     public function ad_delete($id){
-        $resultDelete = AdService::deleteAd($id);
+        $idDecrypted = DecryptId::decryptId($id);
+        if(!$idDecrypted){
+            return \redirect()->route('home');
+        }
+        $resultDelete = AdService::deleteAd($idDecrypted);
         if(!$resultDelete){
             return redirect()->route("dashboard.my_ads")->with("error", "Erro ao deletar anuncio");
         }
