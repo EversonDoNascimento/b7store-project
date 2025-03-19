@@ -103,5 +103,10 @@ class AdService {
     public static function  editAd($ad){
 
     }
+
+    public static function getSingleAdById($id){
+        $ad = Advertise::where(['id' => $id])->where(['user_id' => Auth::user()->id])->first();
+        return $ad;
+    }
  
 }

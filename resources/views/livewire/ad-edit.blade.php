@@ -1,4 +1,3 @@
-
 <main>
     <div class="newAd-page">
     <div class="newAd-title">Novo anúncio</div>
@@ -35,7 +34,7 @@
         <form class="newAd-form">
             <div class="title-area">
             <div class="title-label">Título do anúncio</div>
-            <input type="text" placeholder="Digite o título do anúncio" />
+            <input type="text" placeholder="Digite o título do anúncio" value={{$ad->title}} />
             </div>
             <div class="value-area">
             <div class="value-label">

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\AdService;
 use App\Services\CategoryService;
 use App\Utils\DecryptId;
-use Illuminate\Support\Facades\Auth;
 
 class AdController extends Controller
 {
@@ -22,7 +21,8 @@ class AdController extends Controller
     }
 
     public function ad_edit($id){
-        return view('dashboard.ad_edit', ['id' => $id]);
+        $idDecrypted = DecryptId::decryptId($id);
+        return view('dashboard.ad_edit', ['id' => $idDecrypted]);
     }
 
     public function list(){
