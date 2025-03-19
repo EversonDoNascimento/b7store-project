@@ -13,7 +13,9 @@
     <!-- Header -->
     <x-base.header></x-base.header>
     <!-- /Header -->
-    
+    <!-- ad-edit -->
+    <livewire:ad-edit></livewire:ad-edit>
+    <!-- /ad-edit -->
     <!-- Footer -->
     <x-base.footer></x-base.footer>
     <!-- /Footer -->
