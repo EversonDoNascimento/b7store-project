@@ -31,43 +31,59 @@
         </div>
         </div>
         <div class="newAd-area-right">
-        <form class="newAd-form">
-            <div class="title-area">
-            <div class="title-label">Título do anúncio</div>
-            <input type="text" placeholder="Digite o título do anúncio" value={{$ad->title}} />
+        <form wire:submit="save" class="newAd-form">
+             <div class="title-area">
+                <div class="title-label">Título do anúncio</div>
+                <div style="margin-bottom: 20px;">
+                    <input style="margin-bottom: 0;" type="text" name="title" wire:model="title" placeholder="Digite o título do anúncio" />
+                    @error('title') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="value-area">
             <div class="value-label">
                 <div class="value-area-text">Valor</div>
-                <input type="text" placeholder="Digite o valor" />
+                <div>
+                    <input type="text" value="{{ $value }}" wire:model.live.debounce.1000ms="value" name="value" placeholder="Digite o valor" />
+                    @error('value') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="negotiable-area">
                 <div class="negotiable-label">Negociável?</div>
-                <select>
-                <option selected>Não</option>
-                <option>Sim</option>
-                </select>
+                <div>
+                    <select name="negotiable" wire:model="negotiable">
+                        <option value="default" selected>Selecione uma opção</option>
+                        <option value={{ 0 }}>Não</option>
+                        <option value={{ 1 }}>Sim</option>
+                    </select>
+                    @error('negotiable') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
+                </div>
+
             </div>
             </div>
             <div class="newAd-categories-area">
             <div class="newAd-categories-label">Categorias</div>
-            <select class="newAd-categories">
-                <option selected hidden disabled value="">
-                Selecione uma categoria
-                </option>
-                <option value="cars">Carros</option>
-                <option value="eletronics">Eletrônicos</option>
-                <option value="clothes">Roupas</option>
-                <option value="sports">Esporte</option>
-                <option value="babies">Bebês</option>
-            </select>
+                <div style="margin-bottom: 20px;">
+                    <select name="category"  style="margin-bottom: 0;" wire:model="category" class="newAd-categories">
+                        <!-- <option selected value="default">Selecione uma categoria</option> -->
+                        @forEach($loadedCategories as $c)
+                            <option @selected($category == $c->id) value="{{ $c->id }}">{{$c->name}}</option>
+                        @endForEach
+                    </select>
+                   @error('category') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <div class="description-area">
-            <div class="description-label">Descrição</div>
-            <textarea
-                class="description-text"
-                placeholder="Digite a descrição do anúncio"
-            ></textarea>
+               <div class="description-label">Descrição</div>
+                <div style="margin-bottom: 40px;">
+                    <textarea
+                        name="description"
+                        style="margin-bottom: 0;"
+                        wire:model="description"
+                        class="description-text"
+                        placeholder="Digite a descrição do anúncio"
+                    ></textarea>
+                  @error('description') <span class="errorMessage">{{ $message }}</span> @enderror
+                </div>
             </div>
             <button class="newAd-button">Criar anúncio</button>
         </form>

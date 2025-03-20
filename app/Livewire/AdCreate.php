@@ -59,7 +59,12 @@ class AdCreate extends Component
 
     public function updatedValue()
     {
-        $this->value = $this->value !== '' && \strval((int) $this->value) > 0 ? number_format((float) str_replace(',', '.', str_replace('.', '', $this->value)), 2, ',', '.') : '';
+        $this->value = $this->convertValueToCoin($this->value); 
+    }
+
+    public function convertValueToCoin($value){
+        if(!$value) return "";
+        return $value !== '' && \strval((int) $value) > 0 ? number_format((float) str_replace(',', '.', str_replace('.', '', $value)), 2, ',', '.') : '';
     }
 
 }

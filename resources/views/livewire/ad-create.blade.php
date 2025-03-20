@@ -35,7 +35,7 @@
         <form wire:submit="save" class="newAd-form">
           
             <div class="title-area">
-            <div class="title-label">Título do anúncio</div>
+                <div class="title-label">Título do anúncio</div>
                 <div style="margin-bottom: 20px;">
                     <input style="margin-bottom: 0;" type="text" name="title" wire:model="title" placeholder="Digite o título do anúncio" />
                     @error('title') <span class="errorMessage">{{ $message }}</span> @enderror
