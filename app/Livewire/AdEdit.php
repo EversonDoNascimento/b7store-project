@@ -6,22 +6,26 @@ use App\Services\AdService;
 use App\Services\CategoryService;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class AdEdit extends Component
 {
+
+    use WithFileUploads;
+
+
     public $id;
     public $ad;
     public $loadedCategories;
-    #[Validate('required')]
+    public $loadedImages;
     public $title;
-    #[Validate('required|min:0')]
     public $value;
-    #[Validate('required|in:0,1')]
     public $negotiable;
-    #[Validate('required|exists:categories,id')]
     public $category;
-    #[Validate('required')]
     public $description;
+    public $images;
+
+    public $selectedImage;
 
     public function render()
     {   
@@ -46,6 +50,7 @@ class AdEdit extends Component
        $this->negotiable = $this->ad->negotiable;
        $this->category = $this->ad->category->id;
        $this->description = $this->ad->description;
+       $this->loadedImages = $this->ad->images;
     }
     public function updatedValue()
     {
@@ -55,5 +60,29 @@ class AdEdit extends Component
     public function convertValueToCoin($value){
         if(!$value) return "";
         return $value !== '' && \strval((int) $value) > 0 ? number_format((float) str_replace(',', '.', str_replace('.', '', $value)), 2, ',', '.') : '';
+    }
+
+     public function setSelectedImage($index){
+        if($this->images[$index]){
+            $this->selectedImage = $this->images[$index];
+        }
+    }
+
+     public function updated($propertyName){
+        if($propertyName == "images"){
+            $this->selectedImage = $this->images[0];
+        }
+    }
+
+    public function rules(){
+          return [
+            'title' => 'required',
+            'value' => 'required|min:0',
+            'negotiable' => 'required|in:0,1',
+            'category' => 'required|exists:categories,id',
+            'description' => 'required',
+            'images' => ['nullable', 'array', 'max:'. (5 - count($this->ad->images))],
+            'images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:5120'],
+        ];
     }
 }

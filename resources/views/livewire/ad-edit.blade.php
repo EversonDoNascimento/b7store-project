@@ -1,34 +1,43 @@
 <main>
     <div class="newAd-page">
-    <div class="newAd-title">Novo anúncio</div>
+    <div class="newAd-title">Editar anúncio</div>
     <div class="newAd-areas">
         <div class="newAd-area-left">
-        <div class="area-left-up">
+         <div class="area-left-up">
             <div class="area-left-up-title">Imagens</div>
             <div class="area-left-up-img">
-            <img src="assets/icons/imageIcon.png" />
-            <div class="area-left-up-img-text">
+                @if($selectedImage)
+                    <div class="pill-main-image">Esta será a imagem principal</div>
+                @endif
+                @if($images && count($images) <= 5)
+                    <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
+                @else
+                    <img src="{{ asset('assets/icons/imageIcon.png') }}" />
+                @endif
+            <div @click="document.getElementById('images').click()" class="area-left-up-img-text">
+                <input id="images" type="file" wire:model="images" multiple accept="image/*" style="display: none;">
                 <span>Clique aqui</span> para enviar uma imagem
             </div>
             </div>
         </div>
         <div class="area-left-bottom">
-            <div class="smallpics">
-            <img src="assets/icons/imageSmallIcon.png" />
-            </div>
-            <div class="smallpics">
-            <img src="assets/icons/imageSmallIcon.png" />
-            </div>
-            <div class="smallpics">
-            <img src="assets/icons/imageSmallIcon.png" />
-            </div>
-            <div class="smallpics">
-            <img src="assets/icons/imageSmallIcon.png" />
-            </div>
-            <div class="smallpics">
-            <img src="assets/icons/imageSmallIcon.png" />
-            </div>
+            @if(count($loadedImages) > 0)
+                @forEach($loadedImages as $leadedImage)
+                    <div class="smallpics">
+                        <img src="{{ asset('/storage/'. $leadedImage->url ) }}" />
+                    </div>
+                @endForEach
+            @endif
+            @if($images && count($images) > 0)
+                @forEach($images as $image)
+                     <div class="smallpics">
+                        <img src="{{ $image->temporaryUrl() }}" />
+                    </div>
+                @endForEach
+            @endif
+
         </div>
+            @error('images') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
         </div>
         <div class="newAd-area-right">
         <form wire:submit="save" class="newAd-form">
@@ -85,7 +94,7 @@
                   @error('description') <span class="errorMessage">{{ $message }}</span> @enderror
                 </div>
             </div>
-            <button class="newAd-button">Criar anúncio</button>
+            <button class="newAd-button">Editar anúncio</button>
         </form>
         </div>
     </div>
