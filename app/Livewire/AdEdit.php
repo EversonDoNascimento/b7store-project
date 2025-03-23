@@ -5,8 +5,8 @@ namespace App\Livewire;
 use App\Services\AdService;
 use App\Services\CategoryService;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Validation\ValidationException;
 
 class AdEdit extends Component
 {
@@ -39,6 +39,11 @@ class AdEdit extends Component
     }
       public function save(){
         $this->validate();
+        if(!$this->loadedImages || count($this->loadedImages) <= 0){
+            throw ValidationException::withMessages([
+                'imagesLoaded' => 'Precisa selecionar alguma imagem',
+            ]);
+        }
         // AdService::createAd($this);
         //return \redirect(route("ad.create"));
     }

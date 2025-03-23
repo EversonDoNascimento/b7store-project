@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="area-left-bottom">
-            @if(count($loadedImages) > 0)
+            @if($loadedImages && count($loadedImages) > 0)
                 @forEach($loadedImages as $leadedImage)
                     <div class="smallpics">
                         <img src="{{ asset('/storage/'. $leadedImage->url ) }}" />
@@ -38,6 +38,7 @@
 
         </div>
             @error('images') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
+            @error('imagesLoaded') <span style="width: 100%; text-wrap: nowrap;" class="errorMessage">{{ $message }}</span> @enderror
         </div>
         <div class="newAd-area-right">
         <form wire:submit="save" class="newAd-form">
