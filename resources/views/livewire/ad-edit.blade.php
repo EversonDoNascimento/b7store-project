@@ -9,10 +9,10 @@
                 @if($selectedImage)
                     <div class="pill-main-image">Esta será a imagem principal</div>
                 @endif
-                @if($images && count($images) <= 5)
+                @if($isLocalImageSelected && $images && count($images) <= 5)
                     <img style="max-width: 100%; max-height: 100%;" src="{{ $selectedImage->temporaryUrl() }}" />
                 @else
-                    <img src="{{ asset('assets/icons/imageIcon.png') }}" />
+                    <img src="{{ asset('/storage/'. $selectedImage) }}" />
                 @endif
             <div @click="document.getElementById('images').click()" class="area-left-up-img-text">
                 <input id="images" type="file" wire:model="images" multiple accept="image/*" style="display: none;">
@@ -22,15 +22,15 @@
         </div>
         <div class="area-left-bottom">
             @if($loadedImages && count($loadedImages) > 0)
-                @forEach($loadedImages as $leadedImage)
-                    <div class="smallpics">
+                @forEach($loadedImages as $index => $leadedImage)
+                    <div wire:click="setSelectedImage({{ $index }})" class="smallpics">
                         <img src="{{ asset('/storage/'. $leadedImage->url ) }}" />
                     </div>
                 @endForEach
             @endif
             @if($images && count($images) > 0)
-                @forEach($images as $image)
-                     <div class="smallpics">
+                @forEach($images as $index => $image)
+                    <div wire:click="setSelectedImage({{ $index }}, true)"  class="smallpics">
                         <img src="{{ $image->temporaryUrl() }}" />
                     </div>
                 @endForEach

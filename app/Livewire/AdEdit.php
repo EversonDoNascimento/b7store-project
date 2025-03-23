@@ -24,7 +24,7 @@ class AdEdit extends Component
     public $category;
     public $description;
     public $images;
-
+    public $isLocalImageSelected;
     public $selectedImage;
 
     public function render()
@@ -39,13 +39,16 @@ class AdEdit extends Component
     }
       public function save(){
         $this->validate();
-        if(!$this->loadedImages || count($this->loadedImages) <= 0){
-            throw ValidationException::withMessages([
-                'imagesLoaded' => 'Precisa selecionar alguma imagem',
-            ]);
+        if(!$this->images || count($this->images) <= 0){
+            if(!$this->loadedImages  || count($this->loadedImages) <= 0 ){
+                throw ValidationException::withMessages([
+                    'imagesLoaded' => 'Precisa selecionar alguma imagem',
+                ]);
+            }
         }
         // AdService::createAd($this);
         //return \redirect(route("ad.create"));
+        return dd($this->ad);
     }
 
 
@@ -56,6 +59,12 @@ class AdEdit extends Component
        $this->category = $this->ad->category->id;
        $this->description = $this->ad->description;
        $this->loadedImages = $this->ad->images;
+       if($this->loadedImages){
+            $tempImageLoaded = $this->ad->images->where('featured', 1)->first();
+            if($tempImageLoaded){
+                $this->selectedImage = $tempImageLoaded['url'];
+            }
+       }
     }
     public function updatedValue()
     {
@@ -67,10 +76,15 @@ class AdEdit extends Component
         return $value !== '' && \strval((int) $value) > 0 ? number_format((float) str_replace(',', '.', str_replace('.', '', $value)), 2, ',', '.') : '';
     }
 
-     public function setSelectedImage($index){
-        if($this->images[$index]){
-            $this->selectedImage = $this->images[$index];
+     public function setSelectedImage($index, $isLocal = false){
+        $this->isLocalImageSelected = $isLocal;
+        if($isLocal){
+            if($this->images[$index]){
+                $this->selectedImage = $this->images[$index];
+            }
+            return null;
         }
+        $this->selectedImage = $this->loadedImages[$index]['url'];
     }
 
      public function updated($propertyName){
