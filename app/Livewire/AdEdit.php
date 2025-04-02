@@ -46,9 +46,17 @@ class AdEdit extends Component
                 ]);
             }
         }
+        AdService::saveImagesInStorage($this);
         // AdService::createAd($this);
         //return \redirect(route("ad.create"));
-        return dd($this->ad);
+        /*
+            Verifying if method temporaryUrl exist, if exists then will save the new images in
+            storage.
+        */
+        // if($this->selectedImage && \method_exists($this->selectedImage, 'temporaryUrl')){
+        //     return dd($this->selectedImage);
+        // }
+        // return dd($this->selectedImage);
     }
 
 
@@ -89,7 +97,7 @@ class AdEdit extends Component
 
      public function updated($propertyName){
         if($propertyName == "images"){
-            $this->selectedImage = $this->images[0];
+            $this->selectedImage = $this->loadedImages->where('featured', 1)->first()->url;
         }
     }
 
