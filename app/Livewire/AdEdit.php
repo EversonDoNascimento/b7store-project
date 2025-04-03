@@ -12,8 +12,7 @@ class AdEdit extends Component
 {
 
     use WithFileUploads;
-
-
+    
     public $id;
     public $ad;
     public $loadedCategories;
@@ -46,17 +45,10 @@ class AdEdit extends Component
                 ]);
             }
         }
+
         AdService::saveImagesInStorage($this);
-        // AdService::createAd($this);
-        //return \redirect(route("ad.create"));
-        /*
-            Verifying if method temporaryUrl exist, if exists then will save the new images in
-            storage.
-        */
-        // if($this->selectedImage && \method_exists($this->selectedImage, 'temporaryUrl')){
-        //     return dd($this->selectedImage);
-        // }
-        // return dd($this->selectedImage);
+        AdService::editAd($this);
+ 
     }
 
 
