@@ -73,6 +73,35 @@ class AdService {
         return $ads;
     }
 
+    public static function saveImagesInStorage($ad){
+        if(!$ad || !$ad->images){ 
+            return null;
+        }
+        if($ad->selectedImage){
+            AdService::changeMainImage($ad);
+        }
+        foreach($ad->images as $image){
+            $imageAdvertise = new AdvertiseImage();
+            $imageAdvertise->url = $image->store('images', 'public');
+            if($ad->selectedImage && \method_exists($ad->selectedImage, 'temporaryUrl')){
+                $imageAdvertise->featured = $image->temporaryUrl() == $ad->selectedImage->temporaryUrl() ? true : false;
+            } else{
+                $imageAdvertise->featured = false;
+            }
+            $imageAdvertise->advertise_id = $ad->id;
+            $imageAdvertise->save();
+        }
+    }
+
+    public static function changeMainImage($ad){
+        if(!$ad) return null;
+        $oldFeaturedImage = AdvertiseImage::where('advertise_id', $ad->id)->where('featured', 1)->first();
+        // Verifying if the main image changed
+        if($oldFeaturedImage->url == $ad->selectedImage) return null;
+        $oldFeaturedImage->featured = false;
+        $oldFeaturedImage->save();
+    }
+
     public static function createAd($ad){
         $newAd = new Advertise();
         $category = CategoryService::getSingleCategoryById($ad->category);
