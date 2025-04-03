@@ -12,7 +12,7 @@ class AdEdit extends Component
 {
 
     use WithFileUploads;
-    
+
     public $id;
     public $ad;
     public $loadedCategories;
@@ -45,8 +45,9 @@ class AdEdit extends Component
                 ]);
             }
         }
-
+        // Save new images and defined new main image
         AdService::saveImagesInStorage($this);
+        // Save changes in ad
         AdService::editAd($this);
  
     }
