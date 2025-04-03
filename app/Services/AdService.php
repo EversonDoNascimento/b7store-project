@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 
 class AdService {
-
-
     public static function getAllAds() {
         $ads = Advertise::orderBy("created_at", "desc")->limit(4)->get();
         return $ads;
@@ -130,7 +128,16 @@ class AdService {
     }
 
     public static function  editAd($ad){
+        $advertise = Advertise::where('id', $ad->id)->first();
+        $advertise->title = $ad->title;
+        $advertise->price = $ad->value;
+        $advertise->description = $ad->description;
+        $advertise->negotiable = $ad->negotiable;
+        $advertise->category_id = \intval($ad->category);
 
+        if($advertise->isDirty()){
+            $advertise->save();
+        }
     }
 
     public static function getSingleAdById($id){
