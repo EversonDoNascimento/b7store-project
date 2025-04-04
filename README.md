@@ -81,12 +81,12 @@ Edite o .env com as credenciais do seu banco de dados MySQL.
 
 ## 📸 Imagens do Projeto
 
-![Resgister page](/public/README_IMAGES/1.png)
-![Login page](/public/README_IMAGES/2.png)
-![Home page](/public/README_IMAGES/3.png)
-![Search page](/public/README_IMAGES/4.png)
-![Profile page](/public/README_IMAGES/5.png)
-![My Ads page](/public/README_IMAGES/6.png)
+![Resgister page](./public/README_IMAGES/1.png)
+![Login page](./public/README_IMAGES/2.png)
+![Home page](./public/README_IMAGES/3.png)
+![Search page](./public/README_IMAGES/4.png)
+![Profile page](./public/README_IMAGES/5.png)
+![My Ads page](./public/README_IMAGES/6.png)
 
 ## 🎯 Objetivo do Projeto
 
