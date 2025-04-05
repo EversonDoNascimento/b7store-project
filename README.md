@@ -32,7 +32,7 @@ B7Store é uma aplicação de e-commerce simples desenvolvida em Laravel, onde u
 1. Clone o repositório:
 
 ```bash
-   git clone https://github.com/seu-usuario/b7store.git
+   git clone https://github.com/EversonDoNascimento/b7store-project.git
 ```
 
 2. Acesse o diretório do projeto:
