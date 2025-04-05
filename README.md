@@ -38,7 +38,7 @@ B7Store é uma aplicação de e-commerce simples desenvolvida em Laravel, onde u
 2. Acesse o diretório do projeto:
 
 ```bash
-   cd b7store
+   cd b7store-project
 ```
 
 3. Instale as dependências:
