@@ -54,4 +54,8 @@ class User extends Authenticatable
     public function state(): HasOne {
         return $this->hasOne(related: State::class);
     }
+
+    public function phones(): HasMany {
+        return $this->hasMany(related: Contact::class);
+    }
 }
