@@ -27,11 +27,13 @@ class AdEdit extends Component
     public $selectedImage;
 
     public function render()
-    {   
+    {      
+        // return dd($this->selectedImage);
         return view('livewire.ad-edit');
     }
 
     public function mount(){
+     
         $this->loadedCategories = CategoryService::getAllCategories();
         $this->ad = AdService::getSingleAdById($this->id);
         $this->fillOldDate();
@@ -49,6 +51,7 @@ class AdEdit extends Component
         AdService::saveImagesInStorage($this);
         // Save changes in ad
         AdService::editAd($this);
+        AdService::changeMainImage($this, $this->selectedImage);
  
     }
 
@@ -90,8 +93,12 @@ class AdEdit extends Component
 
      public function updated($propertyName){
         if($propertyName == "images"){
-            $this->selectedImage = $this->loadedImages->where('featured', 1)->first()->url;
+            $loaded = $this->loadedImages->where('featured', 1)->first();
+            if($loaded){
+                $this->selectedImage = $loaded->url;
+            }  
         }
+        
     }
 
     public function rules(){

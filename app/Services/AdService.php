@@ -78,6 +78,7 @@ class AdService {
         if($ad->selectedImage){
             AdService::changeMainImage($ad);
         }
+
         foreach($ad->images as $image){
             $imageAdvertise = new AdvertiseImage();
             $imageAdvertise->url = $image->store('images', 'public');
@@ -91,13 +92,24 @@ class AdService {
         }
     }
 
-    public static function changeMainImage($ad){
+    public static function changeMainImage($ad, $newMainImage = null){
         if(!$ad) return null;
         $oldFeaturedImage = AdvertiseImage::where('advertise_id', $ad->id)->where('featured', 1)->first();
         // Verifying if the main image changed
-        if($oldFeaturedImage->url == $ad->selectedImage) return null;
+        if($oldFeaturedImage == null || $oldFeaturedImage->url == $ad->selectedImage) return null;
         $oldFeaturedImage->featured = false;
         $oldFeaturedImage->save();
+        // Verifying if exist a new main image
+        if($newMainImage){
+            $newMain = AdvertiseImage::where('url', $newMainImage)->first();
+            // return dd($newMainImage);
+            // If exist then this image is settled how main
+            if($newMain){
+                $newMain->featured = true;
+                $newMain->save();
+            }
+        }
+            
     }
 
     public static function createAd($ad){
